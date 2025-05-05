@@ -39,7 +39,7 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
         for i, row in hasil.iterrows():
             # Menampilkan gambar jika URL gambar tersedia dan valid
             if pd.notna(row['link_gambar']) and row['link_gambar'].startswith(('http://', 'https://')):
-                st.image(row['link_gambar'], caption=row['nama'], use_column_width=True)
+                st.image(row['link_gambar'], caption=row['nama'], use_container_width=False, width=300)  # Mengatur lebar gambar
             else:
                 st.warning(f"Tautan gambar untuk {row['nama']} tidak valid.")
             
@@ -58,7 +58,7 @@ else:
     for i, row in df_clean.iterrows():
         # Menampilkan gambar jika URL gambar tersedia dan valid
         if pd.notna(row['link_gambar']) and row['link_gambar'].startswith(('http://', 'https://')):
-            st.image(row['link_gambar'], caption=row['nama'], use_column_width=True)
+            st.image(row['link_gambar'], caption=row['nama'], use_container_width=False, width=300)  # Mengatur lebar gambar
         else:
             st.warning(f"Tautan gambar untuk {row['nama']} tidak valid.")
         
