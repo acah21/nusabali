@@ -37,17 +37,35 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
 
     if not hasil.empty:
         for i, row in hasil.iterrows():
-            # Menampilkan gambar jika URL gambar tersedia dan valid
-            if pd.notna(row['link_gambar']) and row['link_gambar'].startswith(('http://', 'https://')):
-                st.image(row['link_gambar'], caption=row['nama'], use_container_width=False, width=300)  # Mengatur lebar gambar
-            else:
-                st.warning(f"Tautan gambar untuk {row['nama']} tidak valid.")
-            
+            # Menampilkan gambar jika URL gambar tersedia
+            if 'link_gambar' in row and pd.notna(row['link_gambar']):
+                st.image(row['link_gambar'], caption=row['nama'], use_column_width=True)
+
             # Menampilkan informasi lainnya
-            st.markdown(f"**{row['nama']}**  \n"
-                        f"*Kategori:* {row['kategori']}  \n"
-                        f"*Kabupaten/Kota:* {row['kabupaten_kota']}  \n"
-                        f"*Rating:* {row['rating']}  \n")
+            st.markdown(f"{row['nama']}**  \n"
+                        f"Kategori: {row['kategori']}  \n"
+                        f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
+                        f"Rating: {row['rating']}  \n")
+            
+            # Menampilkan tombol untuk membuka link ke Google Maps
+            if 'link' in row and pd.notna(row['link']):
+                if st.button(f"Open {row['nama']} in Google Maps"):
+                    # Membuka link Google Maps di tab baru
+                    js = f"window.open('{row['link']}', '_blank');"
+                    html = f'<script>{js}</script>'
+                    st.markdown(html, unsafe_allow_html=True)
+
+            # Menambahkan tombol "Rute" yang mengarahkan ke Google Maps dengan rute
+            if 'link' in row and pd.notna(row['link']):
+                if st.button(f"Rute ke {row['nama']}"):
+                    # Membuka rute ke lokasi wisata di Google Maps
+                    # Gantilah 'current_location' dengan koordinat asal pengguna jika tersedia (misalnya 'current_location=LAT,LONG')
+                    current_location = "Denpasar"  # Misalnya, bisa diubah dengan lokasi pengguna saat ini
+                    google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
+                    js_route = f"window.open('{google_maps_route_url}', '_blank');"
+                    html_route = f'<script>{js_route}</script>'
+                    st.markdown(html_route, unsafe_allow_html=True)
+
             st.markdown("---")
     else:
         st.warning("Tidak ada tempat wisata yang sesuai dengan kriteria.")
@@ -56,15 +74,33 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
 else:
     st.title("Daftar Tempat Wisata di Bali")
     for i, row in df_clean.iterrows():
-        # Menampilkan gambar jika URL gambar tersedia dan valid
-        if pd.notna(row['link_gambar']) and row['link_gambar'].startswith(('http://', 'https://')):
-            st.image(row['link_gambar'], caption=row['nama'], use_container_width=False, width=300)  # Mengatur lebar gambar
-        else:
-            st.warning(f"Tautan gambar untuk {row['nama']} tidak valid.")
-        
+        # Menampilkan gambar jika URL gambar tersedia
+        if 'link_gambar' in row and pd.notna(row['link_gambar']):
+            st.image(row['link_gambar'], caption=row['nama'], use_column_width=True)
+
         # Menampilkan informasi lainnya
-        st.markdown(f"**{row['nama']}**  \n"
-                    f"*Kategori:* {row['kategori']}  \n"
-                    f"*Kabupaten/Kota:* {row['kabupaten_kota']}  \n"
-                    f"*Rating:* {row['rating']}  \n")
+        st.markdown(f"{row['nama']}**  \n"
+                    f"Kategori: {row['kategori']}  \n"
+                    f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
+                    f"Rating: {row['rating']}  \n")
+        
+        # Menampilkan tombol untuk membuka link ke Google Maps
+        if 'link' in row and pd.notna(row['link']):
+            if st.button(f"Open {row['nama']} in Google Maps"):
+                # Membuka link Google Maps di tab baru
+                js = f"window.open('{row['link']}', '_blank');"
+                html = f'<script>{js}</script>'
+                st.markdown(html, unsafe_allow_html=True)
+
+        # Menambahkan tombol "Rute" yang mengarahkan ke Google Maps dengan rute
+        if 'link' in row and pd.notna(row['link']):
+            if st.button(f"Rute ke {row['nama']}"):
+                # Membuka rute ke lokasi wisata di Google Maps
+                # Gantilah 'current_location' dengan koordinat asal pengguna jika tersedia (misalnya 'current_location=LAT,LONG')
+                current_location = "Denpasar"  # Misalnya, bisa diubah dengan lokasi pengguna saat ini
+                google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
+                js_route = f"window.open('{google_maps_route_url}', '_blank');"
+                html_route = f'<script>{js_route}</script>'
+                st.markdown(html_route, unsafe_allow_html=True)
+
         st.markdown("---")
