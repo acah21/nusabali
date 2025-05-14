@@ -48,7 +48,7 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
                         f"Kategori: {row['kategori']}  \n"
                         f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                         f"Rating: {row['rating']}  \n")
-            
+
             # Menambahkan tombol "Rute" yang mengarahkan ke Google Maps dengan rute
             if 'link' in row and pd.notna(row['link']):
                 if st.button(f"Rute ke {row['nama']}"):
