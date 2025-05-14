@@ -42,18 +42,15 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
                 st.image(row['link_gambar'], caption=row['nama'], use_container_width=True)
 
             # Menampilkan informasi lainnya
-            st.markdown(f"{row['nama']} \n"
+            st.markdown(f"{row['nama']}**  \n"
                         f"Kategori: {row['kategori']}  \n"
                         f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                         f"Rating: {row['rating']}  \n")
 
             # Tombol "Rute" untuk membuka Google Maps
             if 'link' in row and pd.notna(row['link']):
-                if st.button(f"Rute ke {row['nama']}"):
-                    # Membuka rute ke lokasi wisata di Google Maps
-                    current_location = "Denpasar"  # Misalnya, bisa diganti dengan lokasi pengguna saat ini
-                    google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
-                    st.markdown(f"[Klik untuk melihat rute ke {row['nama']}]({google_maps_route_url})", unsafe_allow_html=True)
+                google_maps_route_url = f"https://www.google.com/maps/dir/Denpasar/{row['link']}"
+                st.link_button(f"Rute ke {row['nama']}", google_maps_route_url)
 
             st.markdown("---")
     else:
@@ -68,17 +65,14 @@ else:
             st.image(row['link_gambar'], caption=row['nama'], use_container_width=True)
 
         # Menampilkan informasi lainnya
-        st.markdown(f"{row['nama']}  \n"
+        st.markdown(f"{row['nama']}**  \n"
                     f"Kategori: {row['kategori']}  \n"
                     f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                     f"Rating: {row['rating']}  \n")
 
         # Tombol "Rute" untuk membuka Google Maps
         if 'link' in row and pd.notna(row['link']):
-            if st.button(f"Rute ke {row['nama']}"):
-                # Membuka rute ke lokasi wisata di Google Maps
-                current_location = "Denpasar"  # Misalnya, bisa diganti dengan lokasi pengguna saat ini
-                google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
-                st.markdown(f"[Klik untuk melihat rute ke {row['nama']}]({google_maps_route_url})", unsafe_allow_html=True)
+            google_maps_route_url = f"https://www.google.com/maps/dir/Denpasar/{row['link']}"
+            st.link_button(f"Rute ke {row['nama']}", google_maps_route_url)
 
         st.markdown("---")
