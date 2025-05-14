@@ -42,7 +42,7 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
                 st.image(row['link_gambar'], caption=row['nama'], use_container_width=True)
 
             # Menampilkan informasi lainnya
-            st.markdown(f"{row['nama']} \n"
+            st.markdown(f"{row['nama']}  \n"
                         f"Kategori: {row['kategori']}  \n"
                         f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                         f"Rating: {row['rating']}  \n")
@@ -65,7 +65,7 @@ else:
             st.image(row['link_gambar'], caption=row['nama'], use_container_width=True)
 
         # Menampilkan informasi lainnya
-        st.markdown(f"{row['nama']} \n"
+        st.markdown(f"{row['nama']}  \n"
                     f"Kategori: {row['kategori']}  \n"
                     f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                     f"Rating: {row['rating']}  \n")
