@@ -55,9 +55,7 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
                     # Membuka rute ke lokasi wisata di Google Maps
                     current_location = "Denpasar"  # Misalnya, bisa diganti dengan lokasi pengguna saat ini
                     google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
-                    js_route = f"window.open('{google_maps_route_url}', '_blank');"
-                    html_route = f'<script>{js_route}</script>'
-                    st.markdown(html_route, unsafe_allow_html=True)
+                    st.markdown(f"[Klik untuk melihat rute ke {row['nama']}]({google_maps_route_url})", unsafe_allow_html=True)
 
             st.markdown("---")
     else:
@@ -83,8 +81,6 @@ else:
                 # Membuka rute ke lokasi wisata di Google Maps
                 current_location = "Denpasar"  # Misalnya, bisa diganti dengan lokasi pengguna saat ini
                 google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
-                js_route = f"window.open('{google_maps_route_url}', '_blank');"
-                html_route = f'<script>{js_route}</script>'
-                st.markdown(html_route, unsafe_allow_html=True)
+                st.markdown(f"[Klik untuk melihat rute ke {row['nama']}]({google_maps_route_url})", unsafe_allow_html=True)
 
         st.markdown("---")
