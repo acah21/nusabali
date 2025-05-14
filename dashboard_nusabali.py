@@ -1,3 +1,5 @@
+pip install streamlit pandas
+
 import streamlit as st
 import pandas as pd
 
@@ -37,9 +39,9 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
 
     if not hasil.empty:
         for i, row in hasil.iterrows():
-            # Menampilkan gambar jika URL gambar tersedia
+            # Menampilkan gambar dengan ukuran yang lebih kecil
             if 'link_gambar' in row and pd.notna(row['link_gambar']):
-                st.image(row['link_gambar'], caption=row['nama'], use_column_width=True)
+                st.image(row['link_gambar'], caption=row['nama'], use_container_width=True)
 
             # Menampilkan informasi lainnya
             st.markdown(f"{row['nama']}**  \n"
@@ -47,10 +49,10 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
                         f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                         f"Rating: {row['rating']}  \n")
 
-            # Menambahkan tombol "Rute" yang mengarahkan ke Google Maps dengan rute
+            # Tombol "Rute" untuk membuka Google Maps
             if 'link' in row and pd.notna(row['link']):
                 if st.button(f"Rute ke {row['nama']}"):
-                    # Gantilah 'current_location' dengan lokasi asal pengguna jika tersedia (misalnya 'current_location=LAT,LONG')
+                    # Membuka rute ke lokasi wisata di Google Maps
                     current_location = "Denpasar"  # Misalnya, bisa diganti dengan lokasi pengguna saat ini
                     google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
                     js_route = f"window.open('{google_maps_route_url}', '_blank');"
@@ -65,20 +67,20 @@ if st.sidebar.button("Tampilkan Rekomendasi"):
 else:
     st.title("Daftar Tempat Wisata di Bali")
     for i, row in df_clean.iterrows():
-        # Menampilkan gambar jika URL gambar tersedia
+        # Menampilkan gambar dengan ukuran yang lebih kecil
         if 'link_gambar' in row and pd.notna(row['link_gambar']):
-            st.image(row['link_gambar'], caption=row['nama'], use_column_width=True)
+            st.image(row['link_gambar'], caption=row['nama'], use_container_width=True)
 
         # Menampilkan informasi lainnya
         st.markdown(f"{row['nama']}**  \n"
                     f"Kategori: {row['kategori']}  \n"
                     f"Kabupaten/Kota: {row['kabupaten_kota']}  \n"
                     f"Rating: {row['rating']}  \n")
-        
-        # Menambahkan tombol "Rute" yang mengarahkan ke Google Maps dengan rute
+
+        # Tombol "Rute" untuk membuka Google Maps
         if 'link' in row and pd.notna(row['link']):
             if st.button(f"Rute ke {row['nama']}"):
-                # Gantilah 'current_location' dengan lokasi asal pengguna jika tersedia (misalnya 'current_location=LAT,LONG')
+                # Membuka rute ke lokasi wisata di Google Maps
                 current_location = "Denpasar"  # Misalnya, bisa diganti dengan lokasi pengguna saat ini
                 google_maps_route_url = f"https://www.google.com/maps/dir/{current_location}/{row['link']}"
                 js_route = f"window.open('{google_maps_route_url}', '_blank');"
